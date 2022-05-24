@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "535664421496",
+    "project_id": "taskmenager122",
+    "storage_bucket": "taskmenager122.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535664421496:android:499befd9acb13a3e94db8d",
+        "android_client_info": {
+          "package_name": "com.reduxtest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "535664421496-s0vheqr4bkm0111vdu2kg75krfi29f45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZ45q-nywtqSI4tknGRgmGUdd6F2tke54"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "535664421496-s0vheqr4bkm0111vdu2kg75krfi29f45.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

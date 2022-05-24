@@ -15,39 +15,31 @@ import GLOBAL_COLORS from '../../../../../ui/colors/colors';
 import PrimaryButton from '../../../../../components/PrimaryButton/View/PrimaryButton';
 import StyledText from '../../../../../components/StyledText/View/StyledText';
 import {GLOBAL_FONTS, GLOBAL_FONTSIZES} from '../../../../../ui/fonts/fonts';
+import ContainerHeader from '../../../../../components/ContainerHeader/View/ContainerHeader';
+import LoginInput from '../../../components/LoginInput/View/LoginInput';
 
 type Props = {
-    navigation: any;
+    navigation: NavigationContainerProps;
 }
 
 
 
-const WelcomeView = ({navigation}: Props) => {
+const LoginView = ({navigation}: Props) => {
     return (
         <View style={styles.mainContainer}>
-            <View style={styles.topContainer}/>
-            <View style={styles.bottomContainer}>
+            <View style={styles.topContainer}>
+                <ContainerHeader navigation={navigation}/>
+                <View style={{width: 200, position: 'absolute', top: '45%', left: 20}}>
                 <StyledText
-                    title={'Welcome!'}
+                    title={'Welcome Back!'}
                     fSize={GLOBAL_FONTSIZES.title}
                     fColor={GLOBAL_COLORS.white}
                     font={GLOBAL_FONTS.ROBOTO_BOLD}
                 />
-                <StyledText title={'this the app for something else...'}
-                            fSize={GLOBAL_FONTSIZES.info}
-                            fColor={GLOBAL_COLORS.white}
-                            font={GLOBAL_FONTS.ROBOTO}
-                />
-                <PrimaryButton
-                    title={'Login'}
-                    reverseButton
-                    onPress={() => navigation.navigate('LoginView')}
-                />
-                <PrimaryButton
-                    title={'Sing in'}
-                    fColor={GLOBAL_COLORS.primary}
-                    onPress={() => navigation.navigate('SignInView')}
-                />
+                </View>
+            </View>
+            <View style={styles.bottomContainer}>
+                <LoginInput/>
             </View>
         </View>
         )
@@ -60,8 +52,8 @@ const styles = StyleSheet.create({
         backgroundColor: GLOBAL_COLORS.primary
     },
     topContainer: {
-        flex:2,
-        justifyContent: 'center',
+        flex:1,
+        justifyContent: 'flex-start',
         alignItems: 'center',
     },
     bottomContainer: {
@@ -71,8 +63,9 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingHorizontal: 20,
         paddingBottom: 40,
+        backgroundColor: GLOBAL_COLORS.white
     },
 
 })
 
-export default WelcomeView;
+export default LoginView;
