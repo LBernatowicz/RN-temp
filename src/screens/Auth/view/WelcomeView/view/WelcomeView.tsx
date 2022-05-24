@@ -7,11 +7,12 @@
 
 //import library section
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native';
 
 // import component and interfaces section
 import {NavigationContainerProps} from '@react-navigation/native';
 import GLOBAL_COLORS from '../../../../../ui/colors/colors';
+import hairlineWidth = StyleSheet.hairlineWidth;
 
 type Props = {
     navigation: NavigationContainerProps;
@@ -21,27 +22,31 @@ type Props = {
 
 const WelcomeView = ({navigation}: Props) => {
     return (
-            <SafeAreaView style={styles.mainContainer}>
-                <Text>dsadsa</Text>
-            </SafeAreaView>
+            <View style={styles.mainContainer}>
+                <TouchableOpacity
+                    style={styles.googleButton}
+                >
+                    <Text>Google</Text>
+                </TouchableOpacity>
+
+            </View>
 
     )
 }
 const styles = StyleSheet.create({
     mainContainer: {
         flex:1,
-        backgroundColor: GLOBAL_COLORS.primary
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    headerContainer: {
-        flex:1
-    },
-    lottieContainer: {
-        flex:4,
-        padding: 20,
-        top: '5%',
-    },
-    loginContainer: {
-        flex:1,
+    googleButton:{
+        width: '80%',
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: hairlineWidth,
+        borderRadius: 5,
+        backgroundColor: 'cyan'
     }
 })
 
