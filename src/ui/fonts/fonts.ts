@@ -9,12 +9,12 @@ export const GLOBAL_FONTS = {
 };
 
 export const GLOBAL_FONTSIZES = {
-    cardTitle: 80,
+    cardTitle: 70,
     title: 35,
-    smallTitle: 30,
+    smallTitle: 25,
     header: 20,
-    description: 12,
-    info: 14,
+    description: 10,
+    info: 15,
 };
 
 

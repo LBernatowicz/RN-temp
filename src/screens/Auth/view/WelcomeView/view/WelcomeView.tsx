@@ -6,43 +6,73 @@
  */
 
 //import library section
-import React from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import React, {} from 'react';
+import {View, StyleSheet} from 'react-native';
 
 // import component and interfaces section
 import {NavigationContainerProps} from '@react-navigation/native';
 import GLOBAL_COLORS from '../../../../../ui/colors/colors';
+import PrimaryButton from '../../../../../components/PrimaryButton/View/PrimaryButton';
+import StyledText from '../../../../../components/StyledText/View/StyledText';
+import {GLOBAL_FONTS, GLOBAL_FONTSIZES} from '../../../../../ui/fonts/fonts';
 
 type Props = {
-    navigation: NavigationContainerProps;
+    navigation: any;
 }
 
 
 
 const WelcomeView = ({navigation}: Props) => {
     return (
-            <SafeAreaView style={styles.mainContainer}>
-                <Text>dsadsa</Text>
-            </SafeAreaView>
-
-    )
+        <View style={styles.mainContainer}>
+            <View style={styles.topContainer}/>
+            <View style={styles.bottomContainer}>
+                <StyledText
+                    title={'Welcome!'}
+                    fSize={GLOBAL_FONTSIZES.title}
+                    fColor={GLOBAL_COLORS.white}
+                    font={GLOBAL_FONTS.ROBOTO_BOLD}
+                />
+                <StyledText title={'this the app for something else...'}
+                            fSize={GLOBAL_FONTSIZES.info}
+                            fColor={GLOBAL_COLORS.white}
+                            font={GLOBAL_FONTS.ROBOTO}
+                />
+                <PrimaryButton
+                    title={'Login'}
+                    reverseButton
+                    onPress={() => navigation.navigate('LoginView')}
+                />
+                <PrimaryButton
+                    title={'Sing in'}
+                    fColor={GLOBAL_COLORS.primary}
+                    onPress={() => navigation.navigate('SignInView')}
+                />
+            </View>
+        </View>
+        )
 }
 const styles = StyleSheet.create({
     mainContainer: {
         flex:1,
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: GLOBAL_COLORS.primary
     },
-    headerContainer: {
-        flex:1
+    topContainer: {
+        flex:2,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    lottieContainer: {
-        flex:4,
-        padding: 20,
-        top: '5%',
-    },
-    loginContainer: {
+    bottomContainer: {
         flex:1,
-    }
+        justifyContent: 'flex-end',
+        alignItems: 'flex-start',
+        width: '100%',
+        paddingHorizontal: 20,
+        paddingBottom: 40,
+    },
+
 })
 
 export default WelcomeView;
