@@ -5,7 +5,7 @@
  * 20.04.2022
  */
 
-import React, {ReactNode} from 'react';
+import React, {ReactNode, useEffect, useState} from 'react';
 import {
     Image,
     StyleProp,
@@ -23,7 +23,8 @@ type Props = {
     title?: string;
     label?: string;
     icon?: ReactNode,
-    iconPress?: () => void;
+    iconButton?: ReactNode
+    iconButtonPress?: () => void;
     visibleWarning?: boolean;
     warningLabel?: string;
     labelFont?: string;
@@ -54,9 +55,17 @@ const StyledInput = ({
                          warningLabel,
                          visibleWarning,
                          icon,
-                         iconPress,
+                         iconButtonPress,
+                         iconButton,
                          ...rest
 }: Props) => {
+    const [onFocus, setOnFocus] = useState<boolean>(false)
+    const handleOnFocus = () => {
+        setOnFocus(true)
+    }
+    const handleOnBlur = () => {
+        setOnFocus(false)
+    }
 
     return (
         <View style={styles.mainContainer}>
@@ -71,6 +80,13 @@ const StyledInput = ({
                     />
                 </View>
             <View style={styles.inputContainer}>
+                    {icon &&
+                    <View
+                        style={styles.icon}
+                    >
+                        {icon}
+                    </View>
+                    }
                 <TextInput
                     autoCapitalize="none"
                     value={value}
@@ -78,15 +94,21 @@ const StyledInput = ({
                     secureTextEntry={secure}
                     keyboardType={keyboardType}
                     placeholder={title}
-                    style={inputStyle ? inputStyle : styles.input}
+                    style={[
+                        inputStyle ? inputStyle : styles.input,
+                        onFocus ? styles.onFocus : styles.onBlur,
+                    ]}
+                    onFocus={()=>handleOnFocus()}
+                    onBlur={()=>handleOnBlur()}
+
                     {...rest}
                 />
-                {icon &&
+                {iconButton &&
                     <TouchableOpacity
                         style={styles.iconButton}
-                        onPress={iconPress}
+                        onPress={iconButtonPress}
                     >
-                        {icon}
+                        {iconButton}
                     </TouchableOpacity>
                 }
             </View>
@@ -130,10 +152,8 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: GLOBAL_COLORS.white,
         color: GLOBAL_COLORS.primary,
-        paddingHorizontal:10,
+        paddingHorizontal:35,
         borderRadius:10,
-        borderBottomWidth: 1,
-        borderColor: GLOBAL_COLORS.disabled,
         fontFamily: GLOBAL_FONTS.ROBOTO,
         fontSize: GLOBAL_FONTSIZES.info
     },
@@ -142,7 +162,29 @@ const styles = StyleSheet.create({
     },
     iconButton:{
         position: 'absolute',
-        paddingRight: 15,
+        justifyContent:'center',
+        alignItems: 'center',
+        right:8,
+        zIndex: 5,
+        elevation: 5,
+    },
+    icon:{
+        position: 'absolute',
+        justifyContent:'center',
+        alignItems: 'center',
+        left:8,
+        bottom:14,
+        zIndex: 5,
+        elevation: 5,
+    },
+    onFocus: {
+        borderBottomWidth: 2,
+        borderColor: GLOBAL_COLORS.primary,
+        fontFamily: GLOBAL_FONTS.ROBOTO_BOLD
+    },
+    onBlur: {
+        borderBottomWidth: 1,
+        borderColor: GLOBAL_COLORS.disabled,
     }
 })
 

@@ -17,6 +17,7 @@ import StyledText from '../../../../../components/StyledText/View/StyledText';
 import {GLOBAL_FONTS, GLOBAL_FONTSIZES} from '../../../../../ui/fonts/fonts';
 import ContainerHeader from '../../../../../components/ContainerHeader/View/ContainerHeader';
 import LoginInput from '../../../components/LoginInput/View/LoginInput';
+import Wave1 from '../../../../../assets/svg/Wave1';
 
 type Props = {
     navigation: NavigationContainerProps;
@@ -39,7 +40,10 @@ const LoginView = ({navigation}: Props) => {
                 </View>
             </View>
             <View style={styles.bottomContainer}>
-                <LoginInput/>
+                <Wave1 style={{position: 'absolute', bottom: '40%'}}/>
+                <View style={styles.loginContainer}>
+                    <LoginInput navigation={navigation}/>
+                </View>
             </View>
         </View>
         )
@@ -61,9 +65,16 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'flex-start',
         width: '100%',
+        backgroundColor: GLOBAL_COLORS.white
+    },
+    loginContainer: {
+        flex:1,
+        justifyContent: 'flex-end',
+        alignItems: 'flex-start',
+        width: '100%',
         paddingHorizontal: 20,
         paddingBottom: 40,
-        backgroundColor: GLOBAL_COLORS.white
+        backgroundColor: 'transparent'
     },
 
 })

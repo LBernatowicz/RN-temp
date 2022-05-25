@@ -12,11 +12,11 @@ import {View, StyleSheet} from 'react-native';
 // import component and interfaces section
 import {NavigationContainerProps} from '@react-navigation/native';
 import GLOBAL_COLORS from '../../../../../ui/colors/colors';
-import PrimaryButton from '../../../../../components/PrimaryButton/View/PrimaryButton';
 import StyledText from '../../../../../components/StyledText/View/StyledText';
 import {GLOBAL_FONTS, GLOBAL_FONTSIZES} from '../../../../../ui/fonts/fonts';
-import {Header} from '@react-navigation/stack';
 import ContainerHeader from '../../../../../components/ContainerHeader/View/ContainerHeader';
+import Wave2 from '../../../../../assets/svg/Wave2';
+import LoginInput from '../../../components/LoginInput/View/LoginInput';
 
 type Props = {
     navigation: NavigationContainerProps;
@@ -29,7 +29,7 @@ const SignInView = ({navigation}: Props) => {
         <View style={styles.mainContainer}>
             <View style={styles.topContainer}>
                 <ContainerHeader navigation={navigation} />
-                <View style={{width: 200, position: 'absolute', top: '35%', left: 20}}>
+                <View style={{width: 200, position: 'absolute', top: '45%', left: 20}}>
                     <StyledText
                         title={'Create Account!'}
                         fSize={GLOBAL_FONTSIZES.title}
@@ -39,7 +39,10 @@ const SignInView = ({navigation}: Props) => {
                 </View>
             </View>
             <View style={styles.bottomContainer}>
-
+                <Wave2 style={{position: 'absolute', bottom: '40%'}}/>
+                <View style={styles.signInContainer}>
+                    <LoginInput/>
+                </View>
             </View>
         </View>
         )
@@ -52,18 +55,25 @@ const styles = StyleSheet.create({
         backgroundColor: GLOBAL_COLORS.primary
     },
     topContainer: {
-        flex:3,
+        flex:1,
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
     bottomContainer: {
-        flex:2,
+        flex:1,
         justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        width: '100%',
+        backgroundColor: GLOBAL_COLORS.white
+    },
+    signInContainer: {
+        flex:1,
+        justifyContent: 'flex-end',
         alignItems: 'flex-start',
         width: '100%',
         paddingHorizontal: 20,
         paddingBottom: 40,
-        backgroundColor: GLOBAL_COLORS.white
+        backgroundColor: 'transparent'
     },
 
 })
