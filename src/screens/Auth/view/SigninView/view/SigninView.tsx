@@ -16,7 +16,7 @@ import StyledText from '../../../../../components/StyledText/View/StyledText';
 import {GLOBAL_FONTS, GLOBAL_FONTSIZES} from '../../../../../ui/fonts/fonts';
 import ContainerHeader from '../../../../../components/ContainerHeader/View/ContainerHeader';
 import Wave2 from '../../../../../assets/svg/Wave2';
-import LoginInput from '../../../components/LoginInput/View/LoginInput';
+import SignInInput from '../components/SignInInput/View/SignInInput';
 
 type Props = {
     navigation: NavigationContainerProps;
@@ -39,9 +39,9 @@ const SignInView = ({navigation}: Props) => {
                 </View>
             </View>
             <View style={styles.bottomContainer}>
-                <Wave2 style={{position: 'absolute', bottom: '40%'}}/>
+                <Wave2 style={{position: 'absolute', bottom: '45%'}}/>
                 <View style={styles.signInContainer}>
-                    <LoginInput/>
+                    <SignInInput navigation={navigation}/>
                 </View>
             </View>
         </View>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     bottomContainer: {
-        flex:1,
+        flex:2,
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
         width: '100%',

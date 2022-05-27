@@ -37,6 +37,7 @@ type Props = {
     onChangeText?: ( text: string)=>void
     secure?: boolean;
     keyboardType?: 'default' | 'number-pad' | 'decimal-pad' | 'numeric' | 'email-address' | 'phone-pad'
+    onSubmit?: any
 }
 
 const StyledInput = ({
@@ -57,6 +58,7 @@ const StyledInput = ({
                          icon,
                          iconButtonPress,
                          iconButton,
+    onSubmit,
                          ...rest
 }: Props) => {
     const [onFocus, setOnFocus] = useState<boolean>(false)
@@ -100,7 +102,7 @@ const StyledInput = ({
                     ]}
                     onFocus={()=>handleOnFocus()}
                     onBlur={()=>handleOnBlur()}
-
+                    onSubmitEditing={onSubmit}
                     {...rest}
                 />
                 {iconButton &&
