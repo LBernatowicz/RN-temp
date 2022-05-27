@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
-import PrimaryButton from '../../../../../components/PrimaryButton/View/PrimaryButton';
-import GLOBAL_COLORS from '../../../../../ui/colors/colors';
-import Divider from '../../../../../components/Divider/View/Divider';
-import StyledInput from '../../../../../components/StyledInput/View/StyledInput';
-import {GLOBAL_FONTS, GLOBAL_FONTSIZES} from '../../../../../ui/fonts/fonts';
-import Letter from '../../../../../assets/svg/Letter';
-import Locker from '../../../../../assets/svg/Locker';
+import PrimaryButton from '../../../../../../../components/PrimaryButton/View/PrimaryButton';
+import GLOBAL_COLORS from '../../../../../../../ui/colors/colors';
+import Divider from '../../../../../../../components/Divider/View/Divider';
+import StyledInput from '../../../../../../../components/StyledInput/View/StyledInput';
+import {GLOBAL_FONTS, GLOBAL_FONTSIZES} from '../../../../../../../ui/fonts/fonts';
+import Letter from '../../../../../../../assets/svg/Letter';
+import Locker from '../../../../../../../assets/svg/Locker';
 
 import auth from '@react-native-firebase/auth';
 
@@ -19,13 +19,12 @@ const LoginInput = ({navigation}: Props) => {
     const [email, setEmail] = useState<string>('admin')
     const [password, setPassword] = useState<string>('12345')
     const [showPassword, setShowPassword] = useState<boolean>(true)
-    const [user, setUser] = useState<any>()
-    const [errorText, setErrorText] = useState<string>()
+    const [errorText, setErrorText] = useState<string>('')
 
     const handleSubmitPress = () => {
         setErrorText('')
-        if (!email) {console.log('please fill email')}
-        if (!password) {console.log('please fill password')}
+        if (!email) {console.log(errorText)}
+        if (!password) {console.log(errorText)}
 
         auth().signInWithEmailAndPassword(email, password)
             .then((user) => {
@@ -50,20 +49,6 @@ const LoginInput = ({navigation}: Props) => {
     const handleShowPassword = () => {
         setShowPassword(false)
         setTimeout(()=>setShowPassword(true),2000)
-    }
-
-    const signin = (email: any, pass: any) => {
-        try {
-             auth().signInWithEmailAndPassword(email, pass).then(r => setUser(r));
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const handleVerify = () => {
-        signin(email, password)
-
-        if ((auth().currentUser)) {navigation.navigate('Todo')}
     }
 
     useEffect(()=> {

@@ -16,7 +16,7 @@ import PrimaryButton from '../../../../../components/PrimaryButton/View/PrimaryB
 import StyledText from '../../../../../components/StyledText/View/StyledText';
 import {GLOBAL_FONTS, GLOBAL_FONTSIZES} from '../../../../../ui/fonts/fonts';
 import ContainerHeader from '../../../../../components/ContainerHeader/View/ContainerHeader';
-import LoginInput from '../../../components/LoginInput/View/LoginInput';
+import LoginInput from '../components/LoginInput/View/LoginInput';
 import Wave1 from '../../../../../assets/svg/Wave1';
 
 type Props = {
@@ -40,7 +40,7 @@ const LoginView = ({navigation}: Props) => {
                 </View>
             </View>
             <View style={styles.bottomContainer}>
-                <Wave1 style={{position: 'absolute', bottom: '40%'}}/>
+                <Wave1 style={{position: 'absolute', bottom: '45%'}}/>
                 <View style={styles.loginContainer}>
                     <LoginInput navigation={navigation}/>
                 </View>
