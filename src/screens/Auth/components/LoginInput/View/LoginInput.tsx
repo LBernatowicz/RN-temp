@@ -1,59 +1,83 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import PrimaryButton from '../../../../../components/PrimaryButton/View/PrimaryButton';
 import GLOBAL_COLORS from '../../../../../ui/colors/colors';
 import Divider from '../../../../../components/Divider/View/Divider';
 import StyledInput from '../../../../../components/StyledInput/View/StyledInput';
-import circleArrow from '../../../../../assets/svg/CircleArrow';
 import {GLOBAL_FONTS, GLOBAL_FONTSIZES} from '../../../../../ui/fonts/fonts';
-import CircleArrow from '../../../../../assets/svg/CircleArrow';
 import Letter from '../../../../../assets/svg/Letter';
 import Locker from '../../../../../assets/svg/Locker';
+
+import auth from '@react-native-firebase/auth';
+
 
 type Props = {
     navigation: any
 }
 
 const LoginInput = ({navigation}: Props) => {
-    const [login, setLogin] = useState<string>('admin')
+    const [email, setEmail] = useState<string>('admin')
     const [password, setPassword] = useState<string>('12345')
     const [showPassword, setShowPassword] = useState<boolean>(true)
-    const [verify, setVerify] = useState({
-        login: false,
-        password: false
-    })
+    const [user, setUser] = useState<any>()
+    const [errorText, setErrorText] = useState<string>()
+
+    const handleSubmitPress = () => {
+        setErrorText('')
+        if (!email) {console.log('please fill email')}
+        if (!password) {console.log('please fill password')}
+
+        auth().signInWithEmailAndPassword(email, password)
+            .then((user) => {
+                console.log('user', user)
+                if (user) {navigation.navigate('Todo')}
+            })
+            .catch((error) => {
+                console.log('error', error)
+                if (error.code === "auth/invalid-email")
+                    {setErrorText(error.message);}
+                else if (error.code === "auth/user-not-found")
+                    {setErrorText("No User Found");}
+                else {
+                    setErrorText(
+                        "Please check your email id or password"
+                    );
+                }
+            });
+    }
+
 
     const handleShowPassword = () => {
         setShowPassword(false)
         setTimeout(()=>setShowPassword(true),2000)
     }
 
-    const handleAccess = () => {
-        if (login === 'admin' && password === '12345') {
-            setVerify({
-                login: true,
-                password: true,
-            })
-            console.log(verify,'dane poprawne')
+    const signin = (email: any, pass: any) => {
+        try {
+             auth().signInWithEmailAndPassword(email, pass).then(r => setUser(r));
+        } catch (error) {
+            console.log(error);
         }
-        else if (login === 'admin' && password !== '12345') {console.log('złe hasło')}
-        else if (login !== 'admin' && password === '12345') {console.log('zły login')}
-        else if (login !== 'admin' && password === '12345') {console.log('zły login')}
-    }
+    };
 
     const handleVerify = () => {
-        handleAccess()
-        if ((verify.login && verify.password)) navigation.navigate('Todo')
+        signin(email, password)
+
+        if ((auth().currentUser)) {navigation.navigate('Todo')}
     }
+
+    useEffect(()=> {
+        auth().signOut().then(r => console.log(r))
+    },[])
 
     return (
         <View style={styles.mainContainer}>
             <StyledInput
-                value={login}
-                title={'login...'}
+                value={email}
+                title={'email...'}
                 inputStyle={styles.inputTransparent}
                 icon={<Letter/>}
-                onChangeText={(value) => setLogin(value)}
+                onChangeText={(value) => setEmail(value)}
             />
             <StyledInput
                 secure={showPassword}
@@ -67,9 +91,9 @@ const LoginInput = ({navigation}: Props) => {
             <PrimaryButton
                 title={'Login'}
                 bgColor={GLOBAL_COLORS.primary}
-                onPress={()=>handleVerify()}
+                onPress={()=>handleSubmitPress()}
             />
-            <Divider title={'or login via'}/>
+            <Divider title={'or email via'}/>
             <PrimaryButton
                 title={'Sign In'}
                 fColor={GLOBAL_COLORS.disabled}
